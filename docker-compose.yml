@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  frontend:
+    image: challenget-frontend:latest
+    nginx:
+      image: nginx:stable-alpine
+      links:
+        - peticionador
+      volumes:
+        - nginx_etc:/etc/nginx
+        - static:/web/dist
+      expose:
+        - "4000"
+      ports:
+        - "4000:4000"
+        - "80:80"
+      depends_on:
+        - frontend
+
+volumes:
+  nginx_etc: {}
